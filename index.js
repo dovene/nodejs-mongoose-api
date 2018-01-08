@@ -1,12 +1,12 @@
 var express = require('express'),
   app = express(),
- // port = process.env.PORT || 5000,
+  port = process.env.PORT || 3000,
   mongoose = require('mongoose'),
   //Task = require('./api/models/todoListModel'), //created model loading here
   
   Project = require('./api/models/projectModel'), 
   bodyParser = require('body-parser');
-  app.set('port', (process.env.PORT || 5000));
+  
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
 var connectionString = 'mongodb://localhost/projectManager'
@@ -22,15 +22,10 @@ var routes = require('./api/routes/projectManagerRoutes'); //importing route
 routes(app); //register the route
 
 
-//app.listen(port);
+app.listen(port);
 
 app.use(function(req, res) {
   res.status(404).send({url: req.originalUrl + ' not found'})
 });
-//console.log('todo list RESTful API server started on: ' + port);
-
-
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
-});
+console.log('todo list RESTful API server started on: ' + port);
 
