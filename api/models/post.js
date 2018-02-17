@@ -4,58 +4,25 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var MembersSchema = new Schema({
-  lastName: {
+var PostSchema = new Schema({
+  category: {
     type: String,
-    Required: 'Kindly enter the name '
+    Required: 'Kindly enter the category '
   },
-  surName: {
+  title: {
     type: String,
-    Required: 'Kindly enter the surname'
-  }
-
-});
-
-module.exports = mongoose.model('members', MembersSchema);
-
-//projects
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-
-var ProjectSchema = new Schema({
-  name: {
-    type: String,
-    Required: 'Kindly enter the name of the project'
+    Required: 'Kindly enter the title'
   },
   description: {
     type: String,
-    Required: 'Kindly enter the description of the project'
+    Required: 'Kindly enter the description'
   },
-  startDate: {
-    type: Date,
-    default: Date.now
+  keyWords: {
+    type: Array
   },
-  endDate: {
-    type: Date
-  },
-  manager: {
-    type: Schema.Types.ObjectId, ref: 'members'
-  },
-  members: [
-    { type: Schema.Types.ObjectId, ref: 'members' }
-  ],
-  tasks: [{
-    name: String,
-    status: {
-      type: [{
-        type: String,
-        enum: ['pending', 'ongoing', 'completed']
-      }],
-      default: ['pending']
-    },
-    members: [
-    { type: Schema.Types.ObjectId, ref: 'members' }
-  ],
-  }]
+  image: {
+    type: String
+  }
 });
-module.exports = mongoose.model('projects', ProjectSchema);
+
+module.exports = mongoose.model('post', PostSchema);
