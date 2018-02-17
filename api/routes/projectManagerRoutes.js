@@ -2,6 +2,7 @@
 module.exports = function(app) {
 var projectsController = require('../controllers/projectsController');
 var membersController = require('../controllers/membersController');
+var postsController = require('../controllers/postsController');
 
 
  //projects
@@ -25,5 +26,9 @@ var membersController = require('../controllers/membersController');
     .put(membersController.updateMember)
     .delete(membersController.deleteMember);
 
+//posts
+app.route('/posts')
+.get(postsController.getAll)
+.post(postsController.createOne);
 
 };
