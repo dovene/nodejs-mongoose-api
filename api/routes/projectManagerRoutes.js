@@ -28,7 +28,7 @@ var postsController = require('../controllers/postsController');
 
 //posts
 app.route('/posts')
-.get(postsController.getAll)
-.post(postsController.createOne);
+.get(postsController.getAllPosts)
+.post(postsController.createOnePost);
 
 };
