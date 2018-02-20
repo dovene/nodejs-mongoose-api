@@ -6,7 +6,8 @@ var express = require('express'),
   MongoClient = require('mongodb').MongoClient,
   Project = require('./api/models/projectModel'), 
   Post = require('./api/models/post'), 
-
+  ParentPost = require('./api/models/parentPost'), 
+  
   bodyParser = require('body-parser');
   
 // mongoose instance connection url connection
@@ -30,4 +31,5 @@ app.use(function(req, res) {
   res.status(404).send({url: req.originalUrl + ' not found'})
 });
 console.log('todo list RESTful API server started on: ' + port);
+
 

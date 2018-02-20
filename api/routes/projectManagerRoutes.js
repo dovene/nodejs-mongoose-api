@@ -3,6 +3,7 @@ module.exports = function(app) {
 var projectsController = require('../controllers/projectsController');
 var membersController = require('../controllers/membersController');
 var postsController = require('../controllers/postsController');
+var parentPostController = require('../controllers/parentPostController');
 
 
  //projects
@@ -27,8 +28,14 @@ var postsController = require('../controllers/postsController');
     .delete(membersController.deleteMember);
 
 //posts
-app.route('/posts')
-.get(postsController.getAllPosts)
-.post(postsController.createOnePost);
+  app.route('/posts')
+  .get(postsController.getAllPosts)
+  .post(postsController.createOnePost);
+
+   
+//parentPosts
+  app.route('/parentPosts')
+  .get(parentPostController.getAll)
+  .post(parentPostController.createOne); 
 
 };
