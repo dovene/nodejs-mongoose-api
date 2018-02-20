@@ -25,4 +25,4 @@ var ParentPostSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model('parentPostSchema', ParentPostSchema);
+module.exports = mongoose.model('parentPost', ParentPostSchema);
