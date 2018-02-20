@@ -16,7 +16,7 @@ exports.getAll = function (req, res) {
 
 
 exports.createOne = function(req, res) {
-  var newParentPost = new Post(req.body);
+  var newParentPost = new ParentPost(req.body);
   newParentPost.save(function(err, parentPost) {
     if (err)
       res.send(err);
