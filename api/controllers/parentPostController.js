@@ -27,10 +27,10 @@ exports.createOne = function(req, res) {
 exports.getOne = function(req, res) {
  //var objectID = mongoose.Types.ObjectId(req.params.postId);
  var ObjectId = require('mongoose').Types.ObjectId;
-var elementId = new ObjectId(req.params.postId);
+var elementId = new ObjectId(req.params.parentPostId);
 //var query = {_id: elementid};
-console.log(req.params.postId);
-  Post.findById(req.params.postId, function(err, parentPost) {
+console.log(req.params.parentPostId);
+  Post.findById(req.params.parentPostId, function(err, parentPost) {
     if (err){
       res.send(err); 
       console.log(err);
@@ -38,6 +38,22 @@ console.log(req.params.postId);
     res.json(parentPost);
   });
 };
+
+
+// Show employee by id
+exports.getOneOther = function(req, res) {
+  Post.findOne({_id: req.params.id}).exec(function (err, parentPost) {
+    if (err) {
+      console.log("Error:", err);
+    }
+    else {
+      res.json(parentPost);
+    }
+  });
+};
+
+
+
 
 exports.updateOne = function(req, res) {
   ParentPost.findOneAndUpdate({_id: req.params.postId}, req.body, {new: true},
