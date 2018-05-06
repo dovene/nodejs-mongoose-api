@@ -42,7 +42,7 @@ console.log(req.params.parentPostId);
 
 // Show employee by id
 exports.getOneOther = function(req, res) {
-  Post.findOne({_id: req.params.id}).exec(function (err, parentPost) {
+  Post.findOne({_id: req.params.parentPostId}).exec(function (err, parentPost) {
     if (err) {
       console.log("Error:", err);
     }
