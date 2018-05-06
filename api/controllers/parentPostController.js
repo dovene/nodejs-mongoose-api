@@ -27,10 +27,10 @@ exports.createOne = function(req, res) {
 exports.getOne = function(req, res) {
  //var objectID = mongoose.Types.ObjectId(req.params.postId);
  var ObjectId = require('mongoose').Types.ObjectId;
-var elementId = new ObjectId(req.params.parentPostId);
+var elementId = new ObjectId(req.params.postId);
 //var query = {_id: elementid};
-console.log(req.params.parentPostId);
-  Post.findById(req.params.parentPostId, function(err, parentPost) {
+console.log(req.params.postId);
+  Post.findById(req.params.postId, function(err, parentPost) {
     if (err){
       res.send(err); 
       console.log(err);
