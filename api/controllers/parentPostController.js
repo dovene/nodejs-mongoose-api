@@ -14,6 +14,20 @@ exports.getAll = function (req, res) {
   });
 };
 
+exports.getPost = function(req, res) {
+  //var objectID = mongoose.Types.ObjectId(req.params.memberId);
+  var ObjectId = require('mongoose').Types.ObjectId;
+ var elementId = new ObjectId(req.params.postId);
+ //var query = {_id: elementid};
+ console.log(req.params.postId);
+   Member.findById(req.params.postId, function(err, member) {
+     if (err){
+       res.send(err); 
+       console.log(err);
+     }
+     res.json(member);
+   });
+ };
 
 exports.createOne = function(req, res) {
   var newParentPost = new ParentPost(req.body);
