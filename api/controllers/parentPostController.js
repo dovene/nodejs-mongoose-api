@@ -20,7 +20,7 @@ exports.getPost = function(req, res) {
  var elementId = new ObjectId(req.params.postId);
  //var query = {_id: elementid};
  console.log(req.params.postId);
-   Member.findById(req.params.postId, function(err, member) {
+ ParentPost.findById(req.params.postId, function(err, member) {
      if (err){
        res.send(err); 
        console.log(err);
