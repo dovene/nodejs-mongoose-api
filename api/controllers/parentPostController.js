@@ -54,23 +54,10 @@ console.log(req.params.postId);
 };
 
 
-// Show employee by id
-exports.getOneOther = function(req, res) {
-  Post.findOne({_id: req.params.parentPostId}).exec(function (err, parentPost) {
-    if (err) {
-      console.log("Error:", err);
-    }
-    else {
-      res.json(parentPost);
-    }
-  });
-};
-
-
-
-
 exports.updateOne = function(req, res) {
-  ParentPost.findOneAndUpdate({_id: req.params.postId}, req.body, {new: true},
+    ParentPost.findByIdAndUpdate(req.params.postId, { $set: { title: req.body.title, 
+      category: req.body.category, description: req.body.description }}, 
+      { new: true },
      function(err, post) {
     if (err)
       res.send(err);
