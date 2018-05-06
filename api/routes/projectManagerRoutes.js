@@ -37,5 +37,8 @@ var parentPostController = require('../controllers/parentPostController');
   app.route('/parentPosts')
   .get(parentPostController.getAll)
   .post(parentPostController.createOne); 
-
+  app.route('/parentPosts/:parentPostId')
+    .get(parentPostController.getOne)
+    .put(parentPostController.updateOne)
+    .delete(parentPostController.deleteOne)
 };
