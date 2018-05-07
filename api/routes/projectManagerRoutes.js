@@ -42,6 +42,4 @@ var parentPostController = require('../controllers/parentPostController');
     .get(parentPostController.getPost)
     .put(parentPostController.updateOne)
     .delete(parentPostController.deleteOne);
-
-   
 };
