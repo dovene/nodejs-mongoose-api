@@ -61,7 +61,7 @@ exports.updateOne = function(req, res) {
      function(err, post) {
     if (err)
       res.send(err);
-    //res.json(post);
+      res.json(post);
   });
 };
 
