@@ -7,7 +7,8 @@ var express = require('express'),
   Project = require('./api/models/projectModel'), 
   Post = require('./api/models/post'), 
   ParentPost = require('./api/models/parentPost'), 
-  
+  ParentPostCategory = require('./api/models/parentPostCategory'), 
+
   bodyParser = require('body-parser');
   
 // mongoose instance connection url connection
