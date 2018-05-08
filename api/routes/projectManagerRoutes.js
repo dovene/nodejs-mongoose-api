@@ -4,6 +4,7 @@ var projectsController = require('../controllers/projectsController');
 var membersController = require('../controllers/membersController');
 var postsController = require('../controllers/postsController');
 var parentPostController = require('../controllers/parentPostController');
+var parentPostCategoryController = require('../controllers/parentPostCategoryController');
 
 
  //projects
@@ -42,4 +43,13 @@ var parentPostController = require('../controllers/parentPostController');
     .get(parentPostController.getPost)
     .put(parentPostController.updateOne)
     .delete(parentPostController.deleteOne);
+
+
+     
+//parentPostsCategory
+  app.route('/parentPostsCategory')
+  .get(parentPostCategoryController.getAll)
+  .post(parentPostCategoryController.createOne); 
+
+
 };
