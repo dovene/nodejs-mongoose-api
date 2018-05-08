@@ -11,8 +11,7 @@ var ParentPostCategorySchema = new Schema({
   },
   imagePath: {
     type: String,
-    required: true,
-    trim: true
+    Required: 'Kindly enter the description ',
     },
   imageOriginalName: {
     type: String,
