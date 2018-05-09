@@ -27,9 +27,6 @@ exports.createOne = function(req, res) {
 
 
 
-
-
-
 exports.getOne = function(req, res) {
 ParentPostCategory.findById(req.params.postId, function(err, parentPostCategory) {
     if (err){
