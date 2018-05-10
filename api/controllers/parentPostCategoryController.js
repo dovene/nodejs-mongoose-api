@@ -28,7 +28,7 @@ exports.getAll = function (req, res) {
 var storage = multer.diskStorage({ //multers disk storage settings
   destination: function (req, file, cb) {
   //cb(null, './images');
-  cb(null, __dirname.replace('routes', '') + 'images');
+  cb(null, __dirname.replace('routes', '') + '/uploads');
   },
   filename: function (req, file, cb) {
   var datetimestamp = Date.now();
