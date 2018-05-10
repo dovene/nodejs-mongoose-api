@@ -88,7 +88,7 @@ exports.createOne = function(req, res) {
 
   form.parse(req, function (err, fields, files) {
     var oldpath = files.file.path;
-    var newpath = '/uploads/' + files.file.name;
+    var newpath = __dirname + '/uploads/' + files.file.name;
     fs.rename(oldpath, newpath, function (err) {
       if (err) {
         res.send(err);
@@ -104,6 +104,23 @@ exports.createOne = function(req, res) {
     });
 }); 
 };
+
+/*
+exports.upload = function uploadMedia (req, res, next) { // This is just for my Controller same as app.post(url, function(req,res,next) {....
+  var form = new formidable.IncomingForm()
+  form.multiples = true
+  form.keepExtensions = true
+  form.uploadDir = uploadDir
+  form.parse(req, (err, fields, files) => {
+    if (err) return res.status(500).json({ error: err })
+    res.status(200).json({ uploaded: true })
+  })
+  form.on('fileBegin', function (name, file) {
+    const [fileName, fileExt] = file.name.split('.')
+    file.path = path.join(uploadDir, `${fileName}_${new Date().getTime()}.${fileExt}`)
+  })
+}
+*/
 
 
 
@@ -139,3 +156,15 @@ exports.deleteOne = function(req, res) {
   });
 };
 
+
+exports.getAllFiles = function(req, res) {
+  if (err)
+    res.send(err);
+    res.json(res);
+};
+
+exports.getOneFile = function(req, res) {
+  if (err)
+    res.send(err);
+    res.json(res);
+};

@@ -52,4 +52,11 @@ var parentPostCategoryController = require('../controllers/parentPostCategoryCon
   .post(parentPostCategoryController.createOne); 
 
 
+
+  app.route('/uploads')
+  .get(parentPostCategoryController.getAllFiles)
+
+
+  app.route('/uploads/:id')
+  .get(parentPostCategoryController.getOneFile)
 };
