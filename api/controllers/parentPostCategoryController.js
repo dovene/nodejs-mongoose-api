@@ -89,7 +89,7 @@ exports.createOne = function(req, res) {
   form.parse(req, function (err, fields, files) {
     var oldpath = files.file.path;
     var newpath = '/uploads/' + files.file.name;
-    fs.rename(oldpath, new_path, function (err) {
+    fs.rename(oldpath, newpath, function (err) {
       if (err) {
         res.send(err);
       }else{
