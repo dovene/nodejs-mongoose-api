@@ -93,9 +93,9 @@ exports.createOne = function(req, res) {
 
     fs.rename(oldPath, newPath, function (err) {
       if (err) {
-        move(oldPath,newPath,function(err) {
+        move(oldPath,newPath,function(err,success) {
           if (err) {
-           throw err; 
+           //throw err; 
             res.send(err);
           }else{
             res.write('File uploaded and moved!');  
@@ -190,11 +190,11 @@ function move(oldPath, newPath, callback) {
           if (err.code === 'EXDEV') {
               copy();
           } else {
-              callback(err);
+              callback(err,null);
           }
           return;
       }
-      callback();
+      callback(null,'success');
   });
 
   function copy() {
