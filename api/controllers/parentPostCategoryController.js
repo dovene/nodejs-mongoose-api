@@ -47,7 +47,7 @@ exports.createOne = function(req, res) {
   var newParentPostCategory = new ParentPostCategory(req.body);
 
   var form = new formidable.IncomingForm();
-
+/*
   upload(req,res,function(err){
     if(err){
     res.json({error_code:1,err_desc:err});
@@ -55,7 +55,7 @@ exports.createOne = function(req, res) {
     }
     res.json({error_code:0,err_desc:null, output: req.file});
     });
-
+*/
 
   /*
   form.parse(req, function(err, fields, files) {
@@ -85,12 +85,10 @@ exports.createOne = function(req, res) {
 });
 
 */
-/*
+
   form.parse(req, function (err, fields, files) {
-    var oldpath = files.filetoupload.path;
-    var  file_ext = files.file.name.split('.').pop();
-    var new_path = path.join(process.env.PWD, '/images/', files.filetoupload.name + '.' + file_ext);
-  //  var newpath = '/images/' + files.filetoupload.name;
+    var oldpath = files.file.path;
+    var newpath = '/uploads/' + files.file.name;
     fs.rename(oldpath, new_path, function (err) {
       if (err) {
         res.send(err);
@@ -104,7 +102,7 @@ exports.createOne = function(req, res) {
       }
       
     });
-}); */
+}); 
 };
 
 
