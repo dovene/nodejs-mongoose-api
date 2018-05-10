@@ -21,6 +21,7 @@ exports.createOne = function(req, res) {
   var newParentPostCategory = new ParentPostCategory(req.body);
 
   var form = new formidable.IncomingForm();
+  /*
   form.parse(req, function(err, fields, files) {
     // `file` is the name of the <input> field of type `file`
     var old_path = files.file.path,
@@ -47,9 +48,9 @@ exports.createOne = function(req, res) {
     });
 });
 
+*/
 
-
-  /*form.parse(req, function (err, fields, files) {
+  form.parse(req, function (err, fields, files) {
     var oldpath = files.filetoupload.path;
     var newpath = '/images/' + files.filetoupload.name;
     fs.rename(oldpath, newpath, function (err) {
@@ -65,7 +66,7 @@ exports.createOne = function(req, res) {
       }
       
     });
-}); */
+}); 
 };
 
 
