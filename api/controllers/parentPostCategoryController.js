@@ -96,9 +96,9 @@ exports.createOne = function(req, res) {
         move(oldPath,newPath,function(err) {
           if (err) {
            throw err; 
-           //  res.send(err);
+            res.send(err);
           }else{
-            //res.write('File uploaded and moved!');  
+            res.write('File uploaded and moved!');  
           }
 
         })
