@@ -201,11 +201,11 @@ function move(oldPath, newPath, callback) {
       var readStream = fs.createReadStream(oldPath);
       var writeStream = fs.createWriteStream(newPath);
 
-      readStream.on('error', callback);
-      writeStream.on('error', callback);
+      readStream.on('error', callback('error',null));
+      writeStream.on('error', callback('error',null));
 
       readStream.on('close', function () {
-          fs.unlink(oldPath, callback);
+          fs.unlink(oldPath, callback(null,'success'));
       });
 
       readStream.pipe(writeStream);
