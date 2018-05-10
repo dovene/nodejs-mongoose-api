@@ -87,11 +87,23 @@ exports.createOne = function(req, res) {
 */
 
   form.parse(req, function (err, fields, files) {
-    var oldpath = files.file.path;
-    var newpath = __dirname + '/uploads/' + files.file.name;
-    fs.rename(oldpath, newpath, function (err) {
+    var oldPath = files.file.path;
+    var newPath = __dirname + '/uploads/' + files.file.name;
+
+
+    fs.rename(oldPath, newPath, function (err) {
       if (err) {
-        res.send(err);
+        move(oldPath,newPath,function(err) {
+          if (err) {
+           throw err; 
+           //  res.send(err);
+          }else{
+            //res.write('File uploaded and moved!');  
+          }
+
+        })
+        
+
       }else{
         res.write('File uploaded and moved!');     
         newParentPostCategory.save(function(err, parentPostCategory) {
@@ -104,6 +116,8 @@ exports.createOne = function(req, res) {
     });
 }); 
 };
+
+//end of upload
 
 /*
 exports.upload = function uploadMedia (req, res, next) { // This is just for my Controller same as app.post(url, function(req,res,next) {....
@@ -168,3 +182,32 @@ exports.getOneFile = function(req, res) {
     res.send(err);
     res.json(res);
 };
+
+function move(oldPath, newPath, callback) {
+
+  fs.rename(oldPath, newPath, function (err) {
+      if (err) {
+          if (err.code === 'EXDEV') {
+              copy();
+          } else {
+              callback(err);
+          }
+          return;
+      }
+      callback();
+  });
+
+  function copy() {
+      var readStream = fs.createReadStream(oldPath);
+      var writeStream = fs.createWriteStream(newPath);
+
+      readStream.on('error', callback);
+      writeStream.on('error', callback);
+
+      readStream.on('close', function () {
+          fs.unlink(oldPath, callback);
+      });
+
+      readStream.pipe(writeStream);
+  }
+}
