@@ -5,6 +5,7 @@ var mongoose = require('mongoose').set('debug', true),
 formidable = require('formidable'),
 fs = require('fs'),
 path = require('path'),
+multer = require('multer'),
 ParentPostCategory = mongoose.model('parentPostCategory');
 const uploadDir = path.join(__dirname, '/..', '/..', '/..', '/uploads/') 
 
@@ -19,10 +20,43 @@ exports.getAll = function (req, res) {
 
 
 
+
+
+
+
+// Upload files
+var storage = multer.diskStorage({ //multers disk storage settings
+  destination: function (req, file, cb) {
+  cb(null, './uploads');
+  //cb(null, __dirname.replace('routes', '') + 'public/uploads/foldername');
+  },
+  filename: function (req, file, cb) {
+  var datetimestamp = Date.now();
+  cb(null,'part' + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1]);
+  }
+  });
+  
+  var upload = multer({ //multer settings
+  storage: storage
+  }).single('file');
+  
+  
+
+
 exports.createOne = function(req, res) {
   var newParentPostCategory = new ParentPostCategory(req.body);
 
   var form = new formidable.IncomingForm();
+
+  upload(req,res,function(err){
+    if(err){
+    res.json({error_code:1,err_desc:err});
+    return;
+    }
+    res.json({error_code:0,err_desc:null, output: req.file});
+    });
+
+
   /*
   form.parse(req, function(err, fields, files) {
     // `file` is the name of the <input> field of type `file`
@@ -51,7 +85,7 @@ exports.createOne = function(req, res) {
 });
 
 */
-
+/*
   form.parse(req, function (err, fields, files) {
     var oldpath = files.filetoupload.path;
     var  file_ext = files.file.name.split('.').pop();
@@ -70,7 +104,7 @@ exports.createOne = function(req, res) {
       }
       
     });
-}); 
+}); */
 };
 
 
