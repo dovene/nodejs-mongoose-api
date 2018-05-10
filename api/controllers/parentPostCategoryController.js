@@ -101,7 +101,7 @@ exports.createOne = function(req, res) {
             res.write('File uploaded and moved!');  
           }
 
-        })
+        });
         
 
       }else{
