@@ -14,7 +14,7 @@ var express = require('express'),
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
 var connectionString = 'mongodb://localhost/projectManager'
-//connectionString = 'mongodb://elom:ok@ds259855.mlab.com:59855/pack'
+connectionString = 'mongodb://elom:ok@ds259855.mlab.com:59855/pack'
 mongoose.connect(connectionString, {
   useMongoClient: true,
   promiseLibrary: global.Promise
