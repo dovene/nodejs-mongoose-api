@@ -1,9 +1,10 @@
 'use strict';
 
-var formidable = require('formidable');
-var fs = require('fs');
-var mongoose = require('mongoose').set('debug', true),
 
+var mongoose = require('mongoose').set('debug', true),
+formidable = require('formidable'),
+fs = require('fs'),
+path = require('path'),
 ParentPostCategory = mongoose.model('parentPostCategory');
 
 exports.getAll = function (req, res) {
@@ -20,7 +21,35 @@ exports.createOne = function(req, res) {
   var newParentPostCategory = new ParentPostCategory(req.body);
 
   var form = new formidable.IncomingForm();
-  form.parse(req, function (err, fields, files) {
+  form.parse(req, function(err, fields, files) {
+    // `file` is the name of the <input> field of type `file`
+    var old_path = files.file.path,
+        file_size = files.file.size,
+        file_ext = files.file.name.split('.').pop(),
+        index = old_path.lastIndexOf('/') + 1,
+        file_name = old_path.substr(index),
+        new_path = path.join(process.env.PWD, '/uploads/', file_name + '.' + file_ext);
+
+    fs.readFile(old_path, function(err, data) {
+        fs.writeFile(new_path, data, function(err) {
+            fs.unlink(old_path, function(err) {
+                if (err) {
+                  res.send(err);
+                    //res.status(500);
+                    //res.json({'success': false});
+                } else {
+                    res.status(200);
+                    res.json({'success': true});
+                    res.write('File uploaded and moved!');    
+                }
+            });
+        });
+    });
+});
+
+
+
+  /*form.parse(req, function (err, fields, files) {
     var oldpath = files.filetoupload.path;
     var newpath = '/images/' + files.filetoupload.name;
     fs.rename(oldpath, newpath, function (err) {
@@ -36,7 +65,7 @@ exports.createOne = function(req, res) {
       }
       
     });
-}); 
+}); */
 };
 
 
