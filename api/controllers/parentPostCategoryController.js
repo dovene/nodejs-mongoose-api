@@ -6,6 +6,8 @@ formidable = require('formidable'),
 fs = require('fs'),
 path = require('path'),
 ParentPostCategory = mongoose.model('parentPostCategory');
+const uploadDir = path.join(__dirname, '/..', '/..', '/..', '/uploads/') 
+
 
 exports.getAll = function (req, res) {
   ParentPostCategory.find({}, function (err, parentPost) {
@@ -55,7 +57,7 @@ exports.createOne = function(req, res) {
     var  file_ext = files.file.name.split('.').pop();
     var new_path = path.join(process.env.PWD, '/images/', files.filetoupload.name + '.' + file_ext);
   //  var newpath = '/images/' + files.filetoupload.name;
-    fs.rename(oldpath, newpath, function (err) {
+    fs.rename(oldpath, new_path, function (err) {
       if (err) {
         res.send(err);
       }else{
