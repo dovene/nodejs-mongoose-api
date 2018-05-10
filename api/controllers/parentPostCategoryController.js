@@ -1,7 +1,9 @@
 'use strict';
 
 
-var mongoose = require('mongoose').set('debug', true),
+var mongoose = require('mongoose').set('debug', true);
+var formidable = require('formidable');
+var fs = require('fs');
 
 //Handle members collection
 ParentPostCategory = mongoose.model('parentPostCategory');
@@ -18,11 +20,25 @@ exports.getAll = function (req, res) {
 
 exports.createOne = function(req, res) {
   var newParentPostCategory = new ParentPostCategory(req.body);
-  newParentPostCategory.save(function(err, parentPostCategory) {
-    if (err)
-      res.send(err);
-    res.json(parentPostCategory);
-  });
+
+  var form = new formidable.IncomingForm();
+  form.parse(req, function (err, fields, files) {
+    var oldpath = files.filetoupload.path;
+    var newpath = '/images/' + files.filetoupload.name;
+    fs.rename(oldpath, newpath, function (err) {
+      if (err) {
+        res.send(err);
+      }else{
+        res.write('File uploaded and moved!');     
+        newParentPostCategory.save(function(err, parentPostCategory) {
+          if (err)
+            res.send(err);
+          res.json(parentPostCategory);
+        });
+      }
+      
+    });
+}); 
 };
 
 
