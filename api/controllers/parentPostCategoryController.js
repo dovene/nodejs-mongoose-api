@@ -1,11 +1,9 @@
 'use strict';
 
-
-var mongoose = require('mongoose').set('debug', true);
 var formidable = require('formidable');
 var fs = require('fs');
+var mongoose = require('mongoose').set('debug', true),
 
-//Handle members collection
 ParentPostCategory = mongoose.model('parentPostCategory');
 
 exports.getAll = function (req, res) {
